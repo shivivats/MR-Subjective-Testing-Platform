@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:Label text="Label inside UI Builder" display-tooltip-when-elided="true" />
+    <uie:PropertyField binding-path="m_distances" label="Distances" />
+    <uie:PropertyField binding-path="m_qualities" label="Qualities" />
+    <ui:Toggle label="Toggle" binding-path="m_types" />
+</ui:UXML>
