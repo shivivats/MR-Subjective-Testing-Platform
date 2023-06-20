@@ -76,5 +76,12 @@ crashlytics-build.properties
 *.ply
 *.ply.meta
 
-# Ignore the Ghent Mesh files as well
-/[Aa]ssets/Resources/Meshes/*
+/[Aa]ssets/Resources/PointClouds/**/*.obj
+/[Aa]ssets/Resources/PointClouds/**/*.obj.meta
+
+/[Aa]ssets/Resources/PointClouds/**/*.png
+/[Aa]ssets/Resources/PointClouds/**/*.png.meta
+
+/[Aa]ssets/Resources/PointClouds/**/*.mat
+/[Aa]ssets/Resources/PointClouds/**/*.mat.meta
+

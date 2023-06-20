@@ -45,7 +45,7 @@ struct Varyings
 	half3 color : COLOR;
 	UNITY_FOG_COORDS(2)
 #endif
-	UNITY_VERTEX_OUTPUT_STEREO // Added to enable display on both hololens eyes
+		UNITY_VERTEX_INPUT_INSTANCE_ID // Added to enable display on both hololens eyes
 };
 
 struct VertOut
@@ -58,7 +58,7 @@ struct VertOut
 	half3 color : COLOR;
 	UNITY_FOG_COORDS(2)
 #endif
-	UNITY_VERTEX_OUTPUT_STEREO // Added to enable display on both hololens eyes
+		UNITY_VERTEX_OUTPUT_STEREO // Added to enable display on both hololens eyes
 };
 
 struct FragOut {
@@ -124,7 +124,7 @@ Varyings Vertex(Attributes input)
 
 	// Set vertex output.
 	Varyings o;
-	
+
 	UNITY_SETUP_INSTANCE_ID(input); // Added to enable display on both hololens eyes
 	UNITY_TRANSFER_INSTANCE_ID(input, o); // Added to enable display on both hololens eyes
 
@@ -153,6 +153,7 @@ void Geometry(point Varyings input[1], inout TriangleStream<VertOut> outStream)
 	float2 extent = abs(UNITY_MATRIX_P._11_22 * _PointSize * _PointScalingFactor * _ModelScalingFactor);
 	float4x4 _InverseProjMatrix = inverse(UNITY_MATRIX_P);
 
+	UNITY_SETUP_INSTANCE_ID(input[0]); // Added to enable display on both hololens eyes
 	// Copy the basic information.
 	Varyings o = input[0];
 	VertOut vo;
@@ -176,6 +177,7 @@ void Geometry(point Varyings input[1], inout TriangleStream<VertOut> outStream)
 	vo.uv = float2(0.0f, 1.0f);
 	vo.viewposition = mul(_InverseProjMatrix, vo.position);
 	vo.viewposition /= vo.viewposition.w;
+	UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(vo); // Insert
 	outStream.Append(vo);
 
 	UNITY_LOOP for (uint i = 1; i < slices; i++)
@@ -188,6 +190,7 @@ void Geometry(point Varyings input[1], inout TriangleStream<VertOut> outStream)
 		vo.uv = float2(sn, cs);
 		vo.viewposition = mul(_InverseProjMatrix, vo.position);
 		vo.viewposition /= vo.viewposition.w;
+		UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(vo); // Insert
 		outStream.Append(vo);
 
 		// Left side vertex
@@ -195,6 +198,7 @@ void Geometry(point Varyings input[1], inout TriangleStream<VertOut> outStream)
 		vo.uv.x = -sn;
 		vo.viewposition = mul(_InverseProjMatrix, vo.position);
 		vo.viewposition /= vo.viewposition.w;
+		UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(vo); // Insert
 		outStream.Append(vo);
 	}
 
@@ -204,6 +208,7 @@ void Geometry(point Varyings input[1], inout TriangleStream<VertOut> outStream)
 	vo.uv.x = float2(0.0f, -1.0f);
 	vo.viewposition = mul(_InverseProjMatrix, vo.position);
 	vo.viewposition /= vo.viewposition.w;
+	UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(vo); // Insert
 	outStream.Append(vo);
 
 	outStream.RestartStrip();
