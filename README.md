@@ -1,4 +1,4 @@
-# A Platform for Subjective Quality Assessment in Mixed Reality Environments.
+# A Platform for Subjective Quality Assessment in Mixed Reality Environments
 
 ## System Requirements
 
