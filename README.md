@@ -64,3 +64,14 @@ A `Start` button will be displayed before the start of each task. After every se
 [^1]: When it starts, the project loads the point clouds and mesh files directly into memory. Solutions are being explored to reduce the memory requirement.
 
 [^2]: <Name> is the name you want to associate with the point cloud object. q# signifies the quality level, for e.g. `q1` or `q2`. Each quality level will have its own folder.
+
+## Citation
+
+```
+@inproceedings{Vats_A_Platform_for_2023,
+  author = {Vats, Shivi and Nguyen, Minh and Van Damme, Sam and van der Hooft, Jeroen and Torres Vega, Maria and Wauters, Tim and Timmerer, Christian and Hellwagner, Hermann},
+  series = {QoMEX 2023},
+  title = {{A Platform for Subjective Quality Assessment in Mixed Reality Environments}},
+  year = {2023}
+}
+```
