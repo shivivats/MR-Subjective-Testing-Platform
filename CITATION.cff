@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the paper from preferred-citation and the software itself."
+preferred-citation:
+  authors:
+    - family-names: "Vats"
+      given-names: "Shivi"
+      orcid: "https://orcid.org/0009-0003-4374-9329"
+    - family-names: "Nguyen"
+      given-names: "Minh"
+      orcid: "https://orcid.org/0000−0002−9691−1719"
+    - family-names: "Van Damme"
+      given-names: "Sam"
+      orcid: "https://orcid.org/0000-0001-5398-7927"
+    - family-names: "van der Hooft"
+      given-names: "Jeroen"
+      orcid: "" 
+    - family-names: "Torres Vega"
+      given-names: "Maria"
+      orcid: "https://orcid.org/0000-0002-5656-6607" 
+    - family-names: "Wauters"
+      given-names: "Tim"
+      orcid: "https://orcid.org/0000-0003-2618-3311" 
+    - family-names: "Timmerer"
+      given-names: "Christian"
+      orcid: "https://orcid.org/0000-0002-0031-5243"
+    - family-names: "Hellwagner"
+      given-names: "Hermann"
+      orcid: "https://orcid.org/0000-0003-1114-2584"
+  title: "A Platform for Subjective Quality Assessment in Mixed Reality Environments"
+  type: conference-paper
+  year: "2023"
+  conference: "QoMEX 2023"
+title: "A Platform for Subjective Quality Assessment in Mixed Reality Environments"
+version: 1.0.0
+date-released: 2023-06-20
+url: "https://github.com/shivivats-aau/MR-Subjective-Testing-Platform"
