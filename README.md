@@ -59,7 +59,7 @@ The `Use Fixed Y Offset For Distance` will add a height offset equal to `Y Offse
 
 ### Running the test
 
-A `Start` button will be displayed before the start of each task. After every sequence, the test participant will be asked to give feedback between 1 and 10 using an immersive slider. The feedback is stored in the `Assets\CSV\ratings.csv` file using [CSVHelper]https://joshclose.github.io/CsvHelper/).
+A `Start` button will be displayed before the start of each task. After every sequence, the test participant will be asked to give feedback between 1 and 10 using an immersive slider. The feedback is stored in the `Assets\CSV\ratings.csv` file using [CSVHelper](https://joshclose.github.io/CsvHelper/).
 
 [^1]: When it starts, the project loads the point clouds and mesh files directly into memory. Solutions are being explored to reduce the memory requirement.
 
