@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18332678, g: 0.22894952, b: 0.30621478, a: 1}
+  m_IndirectSpecularColor: {r: 0.18332705, g: 0.22894998, b: 0.30621532, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -531,7 +531,7 @@ PrefabInstance:
       objectReference: {fileID: -8670151273213183110, guid: f4beeadb4b388cd4eaac26df3fc390b2, type: 3}
     - target: {fileID: 5459156599643364181, guid: 0cbce11f5b7dd00458b60a0cea92a1a0, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5459156599643364189, guid: 0cbce11f5b7dd00458b60a0cea92a1a0, type: 3}
       propertyPath: m_Enabled
@@ -585,11 +585,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pcObjects:
+  - objectType: 1
+    pcName: LongDress
+    qualities: 0100000002000000
   - objectType: 2
     pcName: Loot
-    qualities: 010000000200000003000000
+    qualities: 0100000002000000
   loadMeshes: 1
-  isTestingScene: 1
+  isTestingScene: 0
   pcPathPrefix: PointClouds/
 --- !u!4 &716228772
 Transform:
@@ -1143,22 +1146,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tasks:
-  - m_types: 2
-    m_representations: 3
+  - m_types: 3
+    m_representations: 5
     m_distances:
-    - 1
+    - 1.5
     - 3
     m_qualities:
-    - {x: 1, y: 3}
-    - {x: 3, y: 2}
-  - m_types: 2
-    m_representations: 10
-    m_distances:
-    - 1
-    - 4.5
-    m_qualities:
-    - {x: 3, y: 1}
-    - {x: 3, y: 3}
+    - {x: 1, y: 2}
+    - {x: 2, y: 1}
   randomiseTasks: 0
   useFixedYOffsetForDistance: 1
   yOffset: -1.6

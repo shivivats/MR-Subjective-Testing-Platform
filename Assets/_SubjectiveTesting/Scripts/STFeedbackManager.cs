@@ -133,11 +133,11 @@ public class STFeedbackManager : MonoBehaviour
 		Debug.Log("currentUserId " + currentUserId);
 		Debug.Log("currentSequence " + currentSequence);
 		Debug.Log("currentRating " + currentRating);
-		Debug.Log(" SceneManager.Instance.currentQuestionnaireUserId.ToString() " + SceneManager.Instance.currentQuestionnaireUserId.ToString());
+		Debug.Log(" SceneManager.Instance.currentQuestionnaireUserId.ToString() " + ScenesManager.Instance.currentQuestionnaireUserId.ToString());
 		Debug.Log(" DateTime.Now.ToString(\"yyyyMMddHHmmss\") " + DateTime.Now.ToString("yyyy-MM-dd-HH:mm:ss"));
 		// "yyyy-MM-dd-HH:mm:ss"
 
-		RatingRecord ratingRecord = new RatingRecord(currentUserId.ToString(), currentSequence, currentRating, SceneManager.Instance.currentQuestionnaireUserId.ToString(), DateTime.Now.ToString("yyyy-MM-dd-HH:mm:ssK"));
+		RatingRecord ratingRecord = new RatingRecord(currentUserId.ToString(), currentSequence, currentRating, ScenesManager.Instance.currentQuestionnaireUserId.ToString(), DateTime.Now.ToString("yyyy-MM-dd-HH:mm:ssK"));
 
 		Debug.Log("ratingRecord " + ratingRecord);
 		Debug.Log("ratingCsvWriter " + ratingCsvWriter);
@@ -145,7 +145,7 @@ public class STFeedbackManager : MonoBehaviour
 		ratingCsvWriter.WriteRecord(ratingRecord);
 		ratingCsvWriter.NextRecord();
 		ratingCsvWriter.Flush();
-		Debug.Log("Wrote Rating Record with values " + currentUserId.ToString() + ", " + currentSequence + ", " + currentRating + ", " + SceneManager.Instance.currentQuestionnaireUserId.ToString());
+		Debug.Log("Wrote Rating Record with values " + currentUserId.ToString() + ", " + currentSequence + ", " + currentRating + ", " + ScenesManager.Instance.currentQuestionnaireUserId.ToString());
 	}
 
 	private int GetNewUserId()

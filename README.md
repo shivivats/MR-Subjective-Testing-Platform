@@ -2,7 +2,7 @@
 
 ## System Requirements
 
-This platform was developed on a system with an i9-13900K CPU, 64 GB of DDR5-4800 MHz memory and an NVIDIA RTX 4070 Ti. These are all high-end specs (as of mid-2023), but the only absolute requirement here is the memory[^1]. At least 32 GB of memory is recommended. Having a GPU with >=8GB of memory will also be beneficial.
+This platform was tested on a laptop with an i7-12700H, 32 GB of DDR5-4800 MHz memory and an NVIDIA RTX A2000 8GB GPU. These are all high-end specs (as of mid-202), but the only absolute requirement here is the memory[^1]. At least 32 GB of memory is recommended. Having a GPU with >=8GB of memory will also be beneficial.
 
 ## Software Pre-requisites
 
@@ -13,24 +13,19 @@ The project uses MRTK2 to work with the HoloLens 2. Check the tools needed to us
 ## Preparing the Data
 The point clouds PLY files need to be in binary little-endian format. This platform uses ["Pcx - Point Cloud Importer/Renderer for Unity"](https://github.com/keijiro/Pcx), and it only works with that format.
 
-The meshes need to be generated offline. Ensure the meshes have the correct materials associated with them in Unity! The platform was developed and tested with OBJ files and works well with them.
-
-One PLY or OBJ file per frame is utilised to animate the object on the screen.
+One PLY file per frame is utilised to animate the object on the screen.
 
 ## Set up the Project
 1. Download this repository and extract it.
 2. Place the prepared point cloud files in the `Assets\Resources\PointClouds\<Name>\q#\PointClouds` folder[^2].
-3. Similarly, place the prepared mesh files in the `Assets\Resources\PointClouds\<Name>\q#\Mesh` folder[^2].
-4. Select to `PointClouds->Update Point Clouds From Assets` in the menu bar to let the project configure itself using the added objects.
-5. MRTK should already be set up correctly but double-check the XR settings according to the MRTK documentation.
-6. Enable/disable [Holographic Remoting](https://learn.microsoft.com/en-gb/windows/mixed-reality/mrtk-unity/mrtk2/features/tools/holographic-remoting?view=mrtkunity-2022-05) as you desire.
+3. Select to `PointClouds->Update Point Clouds From Assets` in the menu bar to let the project configure itself using the added objects.
+4. MRTK should already be set up correctly but double-check the XR settings according to the MRTK documentation.
+5. Enable/disable [Holographic Remoting](https://learn.microsoft.com/en-gb/windows/mixed-reality/mrtk-unity/mrtk2/features/tools/holographic-remoting?view=mrtkunity-2022-05) as you desire.
 
 ## Point Clouds Loader
-For both functionalities of this platform, there will be a `Manager` object in their respective scene. It contains a `Point Clouds Loader (Script)` component. It is responsible for loading the point clouds/meshes into memory.
+For all functionalities of this platform, there will be a `Manager` object in their respective scene. It contains a `Point Clouds Loader (Script)` component. It is responsible for loading the point clouds/meshes into memory.
 
 Add new elements to the `Pc Objects` array in this component and provide information regarding the object name and quality levels present in the project. Only the objects and qualities mentioned here will be loaded into memory and are the only ones that can be used/interacted with.
-
-The `Load Meshes` toggle controls whether the mesh files for the specified objects will be loaded.
 
 Other values in this script should not be changed.
 
@@ -61,17 +56,17 @@ The `Use Fixed Y Offset For Distance` will add a height offset equal to `Y Offse
 
 A `Start` button will be displayed before the start of each task. After every sequence, the test participant will be asked to give feedback between 1 and 10 using an immersive slider. The feedback is stored in the `Assets\CSV\ratings.csv` file using [CSVHelper](https://joshclose.github.io/CsvHelper/).
 
-[^1]: When it starts, the project loads the point clouds and mesh files directly into memory. Solutions are being explored to reduce the memory requirement.
+[^1]: The project does not use that much memory now, as it only loads the next 5 point cloud sequences needed. However, it has not been tested with a system having less than 32GB of memory, so nothing can be promised if less memory is available.
 
 [^2]: <Name> is the name you want to associate with the point cloud object. q# signifies the quality level, for e.g. `q1` or `q2`. Each quality level will have its own folder.
+
+## Eye-Tracking
+Eye tracking functionality is new in this version of the platform.
+
+The point cloud loading is the same as described above. The sequences will be played twice, and the user's head position and gaze direction will be recorded every frame into a CSV file.
 
 ## Citation
 
 ```
-@inproceedings{Vats_A_Platform_for_2023,
-  author = {Vats, Shivi and Nguyen, Minh and Van Damme, Sam and van der Hooft, Jeroen and Torres Vega, Maria and Wauters, Tim and Timmerer, Christian and Hellwagner, Hermann},
-  series = {QoMEX 2023},
-  title = {{A Platform for Subjective Quality Assessment in Mixed Reality Environments}},
-  year = {2023}
-}
+TBD
 ```

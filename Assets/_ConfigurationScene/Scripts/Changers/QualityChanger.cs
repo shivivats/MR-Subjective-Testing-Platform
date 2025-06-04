@@ -35,7 +35,7 @@ public class QualityChanger : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		qualitySlider.SliderValue = 0.5f;
+		qualitySlider.SliderValue = 0f;
 	}
 
 	public void OnQualitySliderUpdated()
@@ -54,7 +54,7 @@ public class QualityChanger : MonoBehaviour
 			default:
 			case 0.5f: return 2;
 
-			case 1: return 3;
+			case 1: return 2;
 		}
 	}
 }
