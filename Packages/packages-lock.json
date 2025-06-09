@@ -1,13 +1,13 @@
 {
   "dependencies": {
     "com.microsoft.mixedreality.openxr": {
-      "version": "file:MixedReality/com.microsoft.mixedreality.openxr-1.7.2.tgz",
+      "version": "file:MixedReality/com.microsoft.mixedreality.openxr-1.9.0.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
         "com.unity.xr.arfoundation": "4.1.7",
         "com.unity.xr.management": "4.2.0",
-        "com.unity.xr.openxr": "1.5.3",
+        "com.unity.xr.openxr": "1.7.0",
         "com.unity.xr.core-utils": "2.1.0"
       }
     },
@@ -77,6 +77,20 @@
       "dependencies": {
         "com.microsoft.mixedreality.toolkit.foundation": "2.8.3"
       }
+    },
+    "com.unity.addressables": {
+      "version": "1.19.19",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.scriptablebuildpipeline": "1.19.6",
+        "com.unity.modules.assetbundle": "1.0.0",
+        "com.unity.modules.imageconversion": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.modules.unitywebrequestassetbundle": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.collab-proxy": {
       "version": "2.0.0",
@@ -156,6 +170,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.performance.profile-analyzer": {
       "version": "1.2.2",
       "depth": 1,
@@ -170,6 +191,13 @@
       "dependencies": {
         "com.unity.timeline": "1.0.0"
       },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.scriptablebuildpipeline": {
+      "version": "1.20.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.settings-manager": {
@@ -314,11 +342,10 @@
       "url": "https://packages.unity.com"
     },
     "jp.keijiro.pcx": {
-      "version": "1.0.1",
+      "version": "file:jp.keijiro.pcx@1.0.1",
       "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://registry.npmjs.com"
+      "source": "embedded",
+      "dependencies": {}
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

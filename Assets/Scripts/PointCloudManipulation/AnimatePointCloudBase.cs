@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AnimatePointCloudBase : MonoBehaviour
 {
@@ -13,9 +15,10 @@ public class AnimatePointCloudBase : MonoBehaviour
 
     private Mesh[] currentMeshes;
 
-	//protected MeshFilter meshFilterComp;
+    protected bool firstSequence = true;
+    //protected MeshFilter meshFilterComp;
 
-	protected int currentIndex;
+    protected int currentIndex;
 
     protected bool animate = false;
 
@@ -25,11 +28,28 @@ public class AnimatePointCloudBase : MonoBehaviour
 
     public Mesh[] CurrentMeshes { get => currentMeshes; set => currentMeshes = value; }
 
-    void Start()
-    {
-        //gameObject.GetComponent<MeshF = gameObject.GetComponent<MeshFilter>();
+    private float rotationY;
 
-        currentIndex = 0;
+	public GameObject childObject;
+	private Quaternion initialRotation;
+
+
+	void Start()
+    {
+        currentIndex = -1;
+		initialRotation = gameObject.transform.rotation;
+		RotatePCRandomly();
+    }
+
+    protected void RotatePCRandomly()
+    {
+        //rotationY = UnityEngine.Random.Range(-180.0f, 180.0f);
+        List<float> rotations = new List<float> { 0f, 45f, 90f, 135f, 180f, 225f, 270f, 315f, 360f };
+        rotationY = rotations.ElementAt(Random.Range(0, 8));
+
+        //gameObject.transform.Rotate(new Vector3(0f, rotationY, 0f));
+        gameObject.transform.rotation = Quaternion.Euler(gameObject.transform.rotation.eulerAngles.x, rotationY, gameObject.transform.rotation.eulerAngles.z);
+        Debug.Log("Random rotation of PC set to " + rotationY);
     }
 
     void FixedUpdate()
@@ -38,12 +58,24 @@ public class AnimatePointCloudBase : MonoBehaviour
         // set it to 0.016666 for 60 fps, or 0.0333333 for 30 fps
         if (animate)
         {
-            gameObject.GetComponent<MeshFilter>().mesh = CurrentMeshes[++currentIndex];
-
-            if(isMesh)
-            {
-                gameObject.GetComponent<MeshRenderer>().materials = new Material[] { meshMaterials[currentIndex] };
+			if (firstSequence && currentIndex == 0)
+			{
+				// at the first frame, offset the child
+				childObject.transform.localPosition = new Vector3(-1 * childObject.GetComponent<MeshFilter>().mesh.bounds.center.x, 0f, -1 * childObject.GetComponent<MeshFilter>().mesh.bounds.center.z);
 			}
+			//gameObject.GetComponent<MeshFilter>().mesh = CurrentMeshes[++currentIndex];
+			childObject.GetComponent<MeshFilter>().mesh = currentMeshes[++currentIndex];
+
+			//if (isMesh)
+   //         {
+   //             gameObject.GetComponent<MeshRenderer>().materials = new Material[] { meshMaterials[currentIndex] };
+			//}
+        }
+
+        if (currentIndex == -1)
+        {
+            // at the first frame, offset the child
+            //childObject.transform.localPosition = new Vector3(-1 * GetComponent<MeshFilter>().mesh.bounds.center.x, 0f, -1 * GetComponent<MeshFilter>().mesh.bounds.center.z);
         }
 
         AdditionalFixedUpdate();
@@ -103,6 +135,6 @@ public class AnimatePointCloudBase : MonoBehaviour
 
     public void DisplayMessage(string msg)
     {
-        // display the passed argument as a "toast" message on the screen
+        // TODO display the passed argument as a "toast" message on the screen
     }
 }

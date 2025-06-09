@@ -5,29 +5,26 @@ using UnityEngine;
 /*
  * A sequence is the most granular unit of the subjective test.
  * It contains information regarding one playback of the object.
- * Distance, quality (first and second), object type, and object representation are stored
+ * Distance, quality, object type, and object representation are stored
  */
 public class STSequence
 {
-	public STSequence(PCObjectType currentObjectType, PointCloudRepresentation currentMaterialType, float currentDistance, int currentFirstQuality, int currentSecondQuality)
+	public STSequence(PCObjectType currentObjectType, PointCloudMaterialRepresentation currentMaterialType, float currentDistance, QualityRepresentation currentQR)
 	{
 		this.ObjectType = currentObjectType;
 		this.RepresentationType = currentMaterialType;
 		this.Distance = currentDistance;
-		this.FirstQuality = currentFirstQuality;
-		this.SecondQuality = currentSecondQuality;
+		this.QualityRepresentation = currentQR;
 	}
 
 	private PCObjectType objectType;
-	private PointCloudRepresentation representationType;
+	private PointCloudMaterialRepresentation materialRepresentationType;
 
 	private float distance;
-	private int firstQuality;
-	private int secondQuality;
+	private QualityRepresentation qualityRepresentation;
 
 	public PCObjectType ObjectType { get => objectType; set => objectType = value; }
-	public PointCloudRepresentation RepresentationType { get => representationType; set => representationType = value; }
+	public PointCloudMaterialRepresentation RepresentationType { get => materialRepresentationType; set => materialRepresentationType = value; }
 	public float Distance { get => distance; set => distance = value; }
-	public int FirstQuality { get => firstQuality; set => firstQuality = value; }
-	public int SecondQuality { get => secondQuality; set => secondQuality = value; }
+	public QualityRepresentation QualityRepresentation { get => qualityRepresentation; set => qualityRepresentation = value; }
 }

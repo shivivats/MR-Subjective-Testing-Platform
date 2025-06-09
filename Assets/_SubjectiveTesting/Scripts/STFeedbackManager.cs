@@ -48,66 +48,115 @@ public class STFeedbackManager : MonoBehaviour
 		}
 	}
 
-	public GameObject feedbackSliderGameObject;
-	private PinchSlider feedbackSlider;
+	public GameObject[] ratingButtons;
+	public GameObject submitRatingButton;
 
-	public TextMeshPro ratingText;
+	private int currentlySelectedRating = -1;
 
-	public float ratingTextScale;
+	public GameObject nextVideoButton;
+
+	public Material defaultMaterial;
+	public Material pressedMaterial;
+
+	int sequenceCounter = 0;
 
 	// Start is called before the first frame update
 	void Start()
-    {
-		feedbackSlider = feedbackSliderGameObject.GetComponent<PinchSlider>();
-
+	{
 		currentUserId = GetNewUserId();
 		Debug.Log("User ID for current user is " + currentUserId.ToString());
 
-		InitialiseCSV();
+        EnableFeedbackUI(false);
+        ResetRatingButtons();
+
+        InitialiseCSV();
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-	public void OnSliderValueUpdate()
+	private void ResetRatingButtons()
 	{
-		UpdateCurrentRatingAsInt();
-		ratingText.text = "(" + UpdateCurrentRatingAsInt().ToString() + "/" + "10" + ")";
+		foreach (var button in ratingButtons)
+		{
+			GameObject quad = button.transform.Find("BackPlate").Find("Quad").gameObject;
+			quad.GetComponent<MeshRenderer>().material = defaultMaterial;
+		}
+		currentlySelectedRating = -1;
 	}
 
-	public void ChangeSliderRatingFromButton(bool decrement)
-    {
-		float incrementStep = 0.1111111f;
-
-		feedbackSlider.SliderValue = decrement ? Math.Clamp(feedbackSlider.SliderValue - incrementStep, 0, 1) : Math.Clamp(feedbackSlider.SliderValue + incrementStep, 0, 1);
-		Debug.Log(feedbackSlider.SliderValue);
-	}
-
-	private int UpdateCurrentRatingAsInt()
+	public void OnRatingButtonPressed(int rating)
 	{
-		return Mathf.RoundToInt(feedbackSlider.SliderValue / ratingTextScale) + 1;
+		// get the button pressed based on rating
+		GameObject pressedButton = ratingButtons[rating - 1];
+
+		// set all others inactive
+		ResetRatingButtons();
+
+		// change its quad material to presed material
+		GameObject pressedButtonQuad = pressedButton.transform.Find("BackPlate").Find("Quad").gameObject;
+		pressedButtonQuad.GetComponent<MeshRenderer>().material = pressedMaterial;
+
+		// update currently selected rating value
+		currentlySelectedRating = rating;
+	}
+
+	private int GetCurrentRating()
+	{
+		if (currentlySelectedRating != -1)
+			return currentlySelectedRating;
+		else
+			Debug.LogError("Rating is still -1! This should never be allowed.");
+		return -1;
 	}
 
 	public void OnSubmitButtonPress()
 	{
-		StoreSequenceFeedback(STManager.Instance.GetCurrentSequenceString(), UpdateCurrentRatingAsInt().ToString());
+		if (currentlySelectedRating != -1)
+		{
+			if (!STManager.Instance.isRehearsal)
+			{
+				StoreSequenceFeedback(STManager.Instance.GetCurrentSequenceString(), GetCurrentRating().ToString());
+			}
+			//STManager.Instance.AdvanceCurrentTask(); -> we dont advance the task after submitting now, but rather we do it when the specific "next video" button is pressed
+			EnableFeedbackUI(false);
+			ResetRatingButtons();
+			STManager.Instance.OnFeedbackSubmitted();
+			EnableNextVideoButton(true);
+		}
+	}
+
+	public void OnNextVideoButtonPress()
+	{
 		STManager.Instance.AdvanceCurrentTask();
-		EnableFeedbackUI(false);
+		EnableNextVideoButton(false);
 	}
 
 	public void EnableFeedbackUI(bool enable)
 	{
-		feedbackSliderGameObject.transform.parent.gameObject.SetActive(enable);
+		foreach (var button in ratingButtons)
+			button.transform.parent.gameObject.SetActive(enable);
+
+		submitRatingButton.gameObject.SetActive(enable);
+
+		if (enable)
+		{
+			// set the position to be near the user
+			// i.e. set it relative to the camera
+			// world position: +1 Z
+			submitRatingButton.transform.parent.gameObject.transform.SetPositionAndRotation(Camera.main.transform.position + Camera.main.transform.forward * 0.4f, transform.rotation);
+			submitRatingButton.transform.parent.gameObject.transform.LookAt(Camera.main.transform);
+			submitRatingButton.transform.parent.gameObject.transform.Rotate(new Vector3(0f, 180f, 0f));
+		}
+
+	}
+
+	public void EnableNextVideoButton(bool enable)
+	{
+		nextVideoButton.gameObject.SetActive(enable);
 	}
 
 	public bool IsFeedbackUIEnabled()
 	{
-		return feedbackSliderGameObject.transform.parent.gameObject.activeSelf;
+		return submitRatingButton.gameObject.activeSelf;
 	}
-
 
 	public string ratingCsvPath;
 	StreamWriter ratingStreamWriter;
@@ -146,6 +195,8 @@ public class STFeedbackManager : MonoBehaviour
 		ratingCsvWriter.NextRecord();
 		ratingCsvWriter.Flush();
 		Debug.Log("Wrote Rating Record with values " + currentUserId.ToString() + ", " + currentSequence + ", " + currentRating + ", " + ScenesManager.Instance.currentQuestionnaireUserId.ToString());
+		sequenceCounter++;
+		Debug.Log("Sequences done: " + sequenceCounter);
 	}
 
 	private int GetNewUserId()

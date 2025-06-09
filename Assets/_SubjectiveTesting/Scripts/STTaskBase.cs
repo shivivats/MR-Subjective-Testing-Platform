@@ -15,8 +15,7 @@ public class STTaskBase
 
 	public string currentSequenceString = "";
 
-	private Mesh[] firstMeshes;
-	private Mesh[] secondMeshes;
+	private Mesh[] meshes;
 
 	AnimatePointCloudST animateComp;
 
@@ -36,10 +35,6 @@ public class STTaskBase
 		// the sequence string is made like so: 
 		// objectname_firstquality_secondquality_distance
 
-		// qualities are r1, r2, r3
-		// distances are d100, d250, d500
-
-		// e.g.: loot_r1_r3_d1 
 		return currentObjectString + "_" + currentQualityString + "_" + currentDistanceString;
 	}
 
@@ -61,53 +56,28 @@ public class STTaskBase
 		Debug.Log(currSequence.ObjectType);
 		Debug.Log(currPcObject.pointClouds == null);
 		Debug.Log(currSequence == null);
-		Debug.Log(currSequence.FirstQuality);
+		Debug.Log(currSequence.QualityRepresentation.encoder);
+		Debug.Log(currSequence.QualityRepresentation.quality);
 
-		if (currSequence.RepresentationType == PointCloudRepresentation.Mesh)
-		{
-			firstMeshes = currPcObject.meshes[currSequence.FirstQuality];
-			firstMeshes = firstMeshes.Take(firstMeshes.Length / 2).ToArray();
 
-			secondMeshes = currPcObject.meshes[currSequence.SecondQuality];
-			secondMeshes = secondMeshes.Skip(secondMeshes.Length / 2).ToArray();
+		meshes = currPcObject.pointClouds[currSequence.QualityRepresentation];
 
-			Material[] firstMaterials = currPcObject.meshMaterials[currSequence.FirstQuality];
-			firstMaterials = firstMaterials.Take(firstMaterials.Length / 2).ToArray();
+		animateComp.SetIsMesh(false);
+		animateComp.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().materials = new Material[] { STManager.Instance.GetMaterialFromRepresentation(currSequence.RepresentationType) };
 
-			Material[] secondMaterials = currPcObject.meshMaterials[currSequence.SecondQuality];
-			secondMaterials = secondMaterials.Skip(secondMaterials.Length / 2).ToArray();
-
-			animateComp.meshMaterials = firstMaterials.Concat(secondMaterials).ToArray();
-
-			animateComp.SetIsMesh(true);
-		}
-		else
-		{
-			firstMeshes = currPcObject.pointClouds[currSequence.FirstQuality];
-			firstMeshes = firstMeshes.Take(firstMeshes.Length / 2).ToArray();
-
-			secondMeshes = currPcObject.pointClouds[currSequence.SecondQuality];
-			secondMeshes = secondMeshes.Skip(secondMeshes.Length / 2).ToArray();
-
-			animateComp.SetIsMesh(false);
-			animateComp.gameObject.GetComponent<MeshRenderer>().materials = new Material[] { STManager.Instance.GetMaterialFromRepresentation(currSequence.RepresentationType) };
-		}
-
-		animateComp.CurrentMeshes = firstMeshes.Concat(secondMeshes).ToArray();
+		animateComp.CurrentMeshes = meshes;
 
 		STManager.Instance.SetCurrentPCDistance(currSequence.Distance);
 
 		if (currentSequenceIndex < sequences.Count)
 		{
-			string firstQuality = currSequence.FirstQuality.ToString();
-			string secondQuality = currSequence.SecondQuality.ToString();
+			string qualityString = EyeTrackingUtils.Instance.EncoderToString(currSequence.QualityRepresentation.encoder) + "_" + currSequence.QualityRepresentation.quality;
 
-			string qualityString = firstQuality + "_" + qualityPrefix + secondQuality;
 			string distanceString = ((int)(currSequence.Distance * 100f)).ToString();
 
 			string outTextFormatted = MakeSequenceString(
-												PointCloudsLoader.Instance.GetPCNameFromType(currSequence.ObjectType),									
-												qualityPrefix + qualityString,
+												PointCloudsLoader.Instance.GetPCNameFromType(currSequence.ObjectType),
+												qualityString,
 												distancePrefix + distanceString);
 
 			currentSequenceString = outTextFormatted;
@@ -139,6 +109,6 @@ public class STTaskBase
 		// STManager will exactly tell us which sequences we have
 		// it will generate and randomise the sequences
 
-		this.sequences = sequences;	
+		this.sequences = sequences;
 	}
 }

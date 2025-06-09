@@ -6,20 +6,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.XR;
 
-public struct PCAnimationParams
-{
-    public PCObjectType type;
-    public int quality;
-    public bool pointCloud;
-
-    public PCAnimationParams(PCObjectType type, int quality, bool pointCloud)
-    {
-        this.type = type;
-        this.quality = quality;
-        this.pointCloud = pointCloud;
-    }
-}
-
 /** TODO: do some OnGUI or OnValidate check and display a warning that there cannot be more than one object per enum value */
 /** TODO: Investigate making PCSegments into storable objects and thus doing the pre-processing in the editor before playing. */
 /** TODO: Make sure the current frame index in the segment should be managed by the STSequence object */
@@ -45,7 +31,7 @@ public class PointCloudsLoader : MonoBehaviour
     [Header("Point Cloud Objects")]
     public List<PointCloudObject> pcObjects;
 
-    public bool loadMeshes = true;
+    //public bool loadMeshes = false;
 
     // we need to be sure to set this boolean in the inspector for the testing scene!
     public bool isTestingScene = false;
@@ -67,13 +53,27 @@ public class PointCloudsLoader : MonoBehaviour
         }
     }
 
-    public void LoadPointCloudsAndMeshes()
+    public void LoadNextPointClouds(PCObjectType pcObject, QualityRepresentation qr)
     {
-        foreach(PointCloudObject obj in pcObjects) 
-        {
-            obj.LoadAssetsFromDisk();
-        }
+        print(pcObject);
+        print(qr);
+        GetPCObjectFromType(pcObject).LoadQualityRepresentationFromDisk(qr);
+        //StartCoroutine(GetPCObjectFromType(pcObject).LoadAssetsAsync(qr));
     }
+
+    public void UnloadPCQualityRepresentation(PCObjectType pcObject, QualityRepresentation qr)
+    {
+        GetPCObjectFromType(pcObject).UnloadAssetsFromQualityRepresentation(qr);
+        //StartCoroutine(GetPCObjectFromType(pcObject).UnloadAssetsAsync(qr));
+    }
+
+    //public void LoadPointCloudsAndMeshes()
+    //{
+    //    foreach(PointCloudObject obj in pcObjects) 
+    //    {
+    //        obj.LoadAllAssetsFromDisk();
+    //    }
+    //}
 
     /** <summary>
      * Helper function for getting corresponding <c>PointCloudObject</c> from a <c>PCObjectType</c>.
@@ -109,15 +109,33 @@ public class PointCloudsLoader : MonoBehaviour
         return null;
     }
 
-    public string GetBasePCPathFromType(PCObjectType type)
+    public string GetBasePCPathFromTypeAndEncoder(PCObjectType type, EncoderType encoder)
     {
-        return pcPathPrefix + GetPCNameFromType(type) + "/";
-    }
+        string pathString = pcPathPrefix; // already has slash
 
-    private void OnValidate()
-    {
-        // OnValidate is called whenever a value is updated in the inspector
-        // Hence here we can make sure that the number of qualities in the PointCloudObjects is the same as the numQualities int here
+        switch (encoder)
+        {
+            case EncoderType.GPCC_OCTREE:
+                pathString += "GPCC/";
+                pathString += GetPCNameFromType(type) + "/";
+                pathString += "octree-predlift/";
+                break;
+
+            case EncoderType.GPCC_TRISOUP:
+                pathString += "GPCC/";
+                pathString += GetPCNameFromType(type) + "/";
+                pathString += "trisoup-raht/";
+                break;
+
+            case EncoderType.VPCC:
+                pathString += "VPCC/";
+                pathString += GetPCNameFromType(type) + "/";
+                break;
+            default:
+                return null;
+        }
+
+        return pathString;
     }
 
 }

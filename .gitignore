@@ -96,3 +96,10 @@ crashlytics-build.properties
 /[Aa]ssets/Resources/PointClouds/**/*.mat.meta
 
 /[Aa]ssets/CsvHelper
+
+/[Aa]ssets/_EyeTracking/Saved/*
+/[Aa]ssets/_EyeTracking/Excluded_JSON/*
+/[Aa]ssets/_EyeTracking/ErrorCSV/*
+/[Aa]ssets/_EyeTracking/JSON/*
+
+/_EyeTracking/*

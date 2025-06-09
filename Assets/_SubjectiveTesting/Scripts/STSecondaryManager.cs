@@ -37,7 +37,7 @@ public class STSecondaryManager : MonoBehaviour
 
 	// Start is called before the first frame update
 	void Start()
-    {
+	{
 		playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
 
 		startButton.SetActive(true);
@@ -46,8 +46,16 @@ public class STSecondaryManager : MonoBehaviour
 
 	public void SetStartButtonText()
 	{
-		startButtonText.text = "Start Next Task";
-		startButtonText.fontSize = 0.06f;
+		if (STManager.Instance.isRehearsal)
+		{
+			startButtonText.text = "Start Rehearsal";
+			startButtonText.fontSize = 0.05f;
+		}
+		else
+		{
+			startButtonText.text = "Start Test";
+			startButtonText.fontSize = 0.08f;
+		}
 	}
 
 	public void OnFullTaskEnded()
@@ -57,7 +65,7 @@ public class STSecondaryManager : MonoBehaviour
 
 	public void SetCurrentPCDistance(float currentDistance, bool useFixedYOffsetForDistance, float yOffset)
 	{
-		Vector3 newPos = new Vector3(currentGameObject.transform.localPosition.x, 0f, playerCamera.transform.position.z + currentDistance + 1);
+		Vector3 newPos = new Vector3(currentGameObject.transform.localPosition.x, 0f, playerCamera.transform.position.z + currentDistance + 0.2f);
 
 		if (useFixedYOffsetForDistance)
 			newPos.y = playerCamera.transform.position.y + yOffset;
@@ -69,15 +77,15 @@ public class STSecondaryManager : MonoBehaviour
 		Debug.Log("Distance set to " + currentDistance);
 	}
 
-	public Material GetMaterialFromRepresentation(PointCloudRepresentation rep)
+	public Material GetMaterialFromRepresentation(PointCloudMaterialRepresentation rep)
 	{
-		switch(rep)
+		switch (rep)
 		{
-			case PointCloudRepresentation.Point: return pointMaterial;
+			case PointCloudMaterialRepresentation.Point: return pointMaterial;
 
-			case PointCloudRepresentation.Disk: return diskMaterial;
+			case PointCloudMaterialRepresentation.Disk: return diskMaterial;
 
-			case PointCloudRepresentation.Square: return squareMaterial;
+			case PointCloudMaterialRepresentation.Square: return squareMaterial;
 
 			default: return pointMaterial;
 		}
