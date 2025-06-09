@@ -1,4 +1,4 @@
-# A Platform for Subjective Quality Assessment in Mixed Reality Environments
+# STEP-MR: A Subjective Testing and Eye-Tracking Platform for Dynamic Point Clouds in Mixed Reality
 
 ## System Requirements
 
