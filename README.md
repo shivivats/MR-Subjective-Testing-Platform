@@ -8,7 +8,7 @@ This platform was tested on a laptop with an i7-12700H, 32 GB of DDR5-4800 MHz m
 
 The project has been tested with Unity version 2021.3.19f1. Please only use the same, as using newer versions can introduce bugs.
 
-The project uses MRTK2 to work with the HoloLens 2. Check the tools needed to use MRTK2 [here](https://learn.microsoft.com/en-us/windows/mixed-reality/develop/install-the-tools?tabs=unity) and install them.
+The project uses MRTK2 (v 2.8.3) to work with the HoloLens 2. Check the tools needed to use MRTK2 [here](https://learn.microsoft.com/en-us/windows/mixed-reality/develop/install-the-tools?tabs=unity) and install them.
 
 ## Preparing the Data
 The point clouds PLY files need to be in binary little-endian format. This platform uses ["Pcx - Point Cloud Importer/Renderer for Unity"](https://github.com/keijiro/Pcx), and it only works with that format.
