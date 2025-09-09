@@ -68,5 +68,10 @@ The point cloud loading is the same as described above. The sequences will be pl
 ## Citation
 
 ```
-TBD
+@inproceedings{vats2025:platform,
+    author = {S. Vats and C. Timmerer and H. Hellwagner},
+    title = {{STEP-MR: A Subjective Testing and Eye-Tracking Platform for Dynamic Point Clouds in Mixed Reality}},
+    booktitle = {Proceedings of the Application, Poster, and Demo Tracks of the 22nd EuroXR International Conference (EuroXR 2025)},
+    year = {2025}
+}
 ```
