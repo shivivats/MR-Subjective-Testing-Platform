@@ -2,7 +2,7 @@
 
 ## System Requirements
 
-This platform was tested on a laptop with an i7-12700H, 32 GB of DDR5-4800 MHz memory and an NVIDIA RTX A2000 8GB GPU. These are all high-end specs (as of mid-202), but the only absolute requirement here is the memory[^1]. At least 32 GB of memory is recommended. Having a GPU with >=8GB of memory will also be beneficial.
+This platform was tested on a laptop with an i7-12700H, 32 GB of DDR5-4800 MHz memory and an NVIDIA RTX A2000 8GB GPU. These are all high-end specs (as of mid-2024), but the only absolute requirement here is the memory[^1]. At least 32 GB of memory is recommended. Having a GPU with >=8GB of memory will also be beneficial.
 
 ## Software Pre-requisites
 
