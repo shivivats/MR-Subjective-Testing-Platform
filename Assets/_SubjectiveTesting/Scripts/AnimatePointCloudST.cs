@@ -23,7 +23,7 @@ public class AnimatePointCloudST : AnimatePointCloudBase
 				STManager.Instance.OnCurrentSequenceEnded();
 				firstSequence = true;
 				childObject.GetComponent<MeshFilter>().mesh = null;
-                RotatePCRandomly();
+                //RotatePCRandomly();
 			}
 		}
 	}

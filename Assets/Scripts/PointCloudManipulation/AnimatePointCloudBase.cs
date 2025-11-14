@@ -38,19 +38,19 @@ public class AnimatePointCloudBase : MonoBehaviour
     {
         currentIndex = -1;
 		initialRotation = gameObject.transform.rotation;
-		RotatePCRandomly();
+		//RotatePCRandomly();
     }
 
-    protected void RotatePCRandomly()
-    {
-        //rotationY = UnityEngine.Random.Range(-180.0f, 180.0f);
-        List<float> rotations = new List<float> { 0f, 45f, 90f, 135f, 180f, 225f, 270f, 315f, 360f };
-        rotationY = rotations.ElementAt(Random.Range(0, 8));
-
-        //gameObject.transform.Rotate(new Vector3(0f, rotationY, 0f));
-        gameObject.transform.rotation = Quaternion.Euler(gameObject.transform.rotation.eulerAngles.x, rotationY, gameObject.transform.rotation.eulerAngles.z);
-        Debug.Log("Random rotation of PC set to " + rotationY);
-    }
+    // protected void RotatePCRandomly()
+    // {
+    //     //rotationY = UnityEngine.Random.Range(-180.0f, 180.0f);
+    //     List<float> rotations = new List<float> { 0f, 45f, 90f, 135f, 180f, 225f, 270f, 315f, 360f };
+    //     rotationY = rotations.ElementAt(Random.Range(0, 8));
+    //
+    //     //gameObject.transform.Rotate(new Vector3(0f, rotationY, 0f));
+    //     gameObject.transform.rotation = Quaternion.Euler(gameObject.transform.rotation.eulerAngles.x, rotationY, gameObject.transform.rotation.eulerAngles.z);
+    //     Debug.Log("Random rotation of PC set to " + rotationY);
+    // }
 
     void FixedUpdate()
     {

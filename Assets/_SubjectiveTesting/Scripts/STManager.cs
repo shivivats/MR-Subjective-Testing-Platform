@@ -63,10 +63,6 @@ public class STManager : MonoBehaviour
     {
 		List<STSequence> currentSequences = new List<STSequence>();
 
-		currentSequences.Add(new STSequence(PCObjectType.CasualSquat, PointCloudMaterialRepresentation.Square, 2, new QualityRepresentation(EncoderType.VPCC, "r02")));
-		currentSequences.Add(new STSequence(PCObjectType.FlowerDance, PointCloudMaterialRepresentation.Square, 2, new QualityRepresentation(EncoderType.GPCC_TRISOUP, "r02")));
-		currentSequences.Add(new STSequence(PCObjectType.FlowerDance, PointCloudMaterialRepresentation.Square, 2, new QualityRepresentation(EncoderType.VPCC, "r04")));
-		currentSequences.Add(new STSequence(PCObjectType.ReadyForWinter, PointCloudMaterialRepresentation.Square, 2, new QualityRepresentation(EncoderType.VPCC, "r04")));
 		
         System.Random r = new System.Random();
 		currentSequences = currentSequences.OrderBy(x => r.Next()).ToList();

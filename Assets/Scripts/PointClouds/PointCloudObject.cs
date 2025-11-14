@@ -17,20 +17,20 @@ public class PointCloudObject
     {
         //new QualityRepresentation(EncoderType.GPCC_OCTREE, "r01"),
         //new QualityRepresentation(EncoderType.GPCC_OCTREE, "r02"),
-        new QualityRepresentation(EncoderType.GPCC_OCTREE, "r03"),
-        new QualityRepresentation(EncoderType.GPCC_OCTREE, "r04"),
-        new QualityRepresentation(EncoderType.GPCC_OCTREE, "r05"),
-
-        new QualityRepresentation(EncoderType.GPCC_TRISOUP, "r01"),
-        new QualityRepresentation(EncoderType.GPCC_TRISOUP, "r02"),
-        new QualityRepresentation(EncoderType.GPCC_TRISOUP, "r03"),
-        new QualityRepresentation(EncoderType.GPCC_TRISOUP, "r04"),
-
-        new QualityRepresentation(EncoderType.VPCC, "r01"),
-        new QualityRepresentation(EncoderType.VPCC, "r02"),
-        new QualityRepresentation(EncoderType.VPCC, "r03"),
-        new QualityRepresentation(EncoderType.VPCC, "r04"),
-        new QualityRepresentation(EncoderType.VPCC, "r05"),
+        // new QualityRepresentation(EncoderType.GPCC_OCTREE, "r03"),
+        // new QualityRepresentation(EncoderType.GPCC_OCTREE, "r04"),
+        // new QualityRepresentation(EncoderType.GPCC_OCTREE, "r05"),
+        //
+        // new QualityRepresentation(EncoderType.GPCC_TRISOUP, "r01"),
+        // new QualityRepresentation(EncoderType.GPCC_TRISOUP, "r02"),
+        // new QualityRepresentation(EncoderType.GPCC_TRISOUP, "r03"),
+        // new QualityRepresentation(EncoderType.GPCC_TRISOUP, "r04"),
+        //
+        // new QualityRepresentation(EncoderType.VPCC, "r01"),
+        // new QualityRepresentation(EncoderType.VPCC, "r02"),
+        // new QualityRepresentation(EncoderType.VPCC, "r03"),
+        // new QualityRepresentation(EncoderType.VPCC, "r04"),
+        // new QualityRepresentation(EncoderType.VPCC, "r05"),
         new QualityRepresentation(EncoderType.VPCC, "raw")
     };
 
